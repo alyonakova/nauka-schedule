@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+    <link rel="stylesheet" th:href="@{/master.css}">
+</head>
+<body>
+<header>
+    <h1>НАУКА: информация о сотрудниках</h1>
+</header>
+<main>
+    <section>
+        <button>Добавить</button>
+        <button>Редактировать</button>
+        <button>Удалить</button>
+    </section>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <td>Превью</td>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Дата рождения</td>
+                <td>Возраст</td>
+                <td>Должность</td>
+                <td>Удаленная работа</td>
+                <td>Адрес проживания</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <!-- фото сотрудника -->
+                <td></td>
+                <td th:text="${employee.getName()}"></td>
+                <td th:text="${employee.getSurname()}"></td>
+                <td th:text="${employee.getBirthDate()}"></td>
+                <td></td>
+                <td th:text="${employee.getPosition().getName()}"></td>
+                <td> <input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"> </td>
+                <td th:text="${employee.getAddress()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
