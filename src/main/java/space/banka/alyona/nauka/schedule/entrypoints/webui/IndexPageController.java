@@ -51,7 +51,12 @@ public class IndexPageController {
     */
 
     @RequestMapping("/")
-    String showIndexPage(Model model) {
+    String redirectToLargeTimesheet() {
+        return "redirect:/departments/all/timesheet";
+    }
+
+    @RequestMapping("/departments/all/timesheet")
+    String showTimesheetForAllDepartments(Model model) {
         final LocalDate currentDate = LocalDate.now();
         final int currentYear = currentDate.getYear();
         final int currentMonth = currentDate.getMonthValue();
