@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Учет времени</title>
+    <link rel="stylesheet" th:href="@{/master.css}">
+</head>
+<body>
+<header>
+    <h1>НАУКА: учет времени</h1>
+</header>
+<main>
+    <section>
+        <h1>Департаменты</h1>
+        <ul>
+            <li th:each="department : ${departments}">
+                <button th:text="${department.getName()}">Имя департамента</button>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <p><button th:each="month: ${months}" th:text="${month}"></button></p>
+    </section>
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <td>ФИО</td>
+                <td>Должность</td>
+                <td>Табельный №</td>
+                <td th:each="day : ${timesheet.days}" th:text="${day.getId().day}"></td>
+                <td>Итого</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row: ${timesheet.rows}">
+                <td th:text="|${row.employee.getName()} ${row.employee.getSurname()}|"></td>
+                <td th:text="${row.employee.getPosition().getName()}"></td>
+                <td th:text="${row.employee.getId()}"></td>
+                <td th:each="day: ${timesheet.days}">
+                    <span th:text="${row.findDay(day).presence.getLetterCode()}"></span>
+                </td>
+                <td th:text="${row.totalPresenceScore.toString()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
