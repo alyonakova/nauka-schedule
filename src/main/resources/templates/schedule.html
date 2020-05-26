@@ -8,18 +8,38 @@
 <body>
 <header>
     <h1>НАУКА: учет времени</h1>
+    <p>
+        Год: <span th:text="${year}">1970</span>,
+        месяц: <span th:text="${month}">январь</span>.
+        <br>
+        ИД департамента: <span th:text="${departmentId} ?: 'выбраны все департаменты'"></span>.
+    </p>
 </header>
 <main>
     <section>
         <h1>Департаменты</h1>
         <ul>
             <li th:each="department : ${departments}">
-                <button th:text="${department.getName()}">Имя департамента</button>
+                <a href="#"
+                   th:href="@{|/departments/${department.id}/timesheet?year=${year}&month=${month}|}"
+                   th:text="${department.getName()}">
+                    Имя департамента
+                </a>
+            </li>
+            <li>
+                <a style="font-style: italic;" th:href="@{|/departments/all/timesheet?year=${year}&month=${month}|}">
+                    Все департаменты
+                </a>
             </li>
         </ul>
     </section>
     <section>
-        <p><button th:each="month: ${months}" th:text="${month}"></button></p>
+        <ul style="list-style: none;">
+            <li style="display: inline-block;" th:each="month: ${months}">
+                <a th:href="@{|?year=${year}&month=${month.value}|}"
+                   th:text="${month.name}">январь</a>
+            </li>
+        </ul>
     </section>
     <section>
         <table>
