@@ -14,7 +14,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    interface Roles {
+    public interface Roles {
         String DEPARTMENTS_ADMIN = "DepartmentsAdmin";
         String EMPLOYEES_ADMIN = "EmployeesAdmin";
         String TIMESHEET_MANAGER = "TimesheetManager";
@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/").authenticated()
                 .antMatchers("/departments").hasRole(Roles.DEPARTMENTS_ADMIN)
                 .antMatchers("/employees").hasRole(Roles.EMPLOYEES_ADMIN)
                 .antMatchers("/departments/*/timesheet").hasRole(Roles.TIMESHEET_MANAGER);
