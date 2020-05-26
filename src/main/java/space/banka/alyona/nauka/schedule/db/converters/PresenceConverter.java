@@ -1,5 +1,6 @@
 package space.banka.alyona.nauka.schedule.db.converters;
 
+import org.springframework.stereotype.Component;
 import space.banka.alyona.nauka.schedule.db.entities.Presence;
 
 import javax.persistence.AttributeConverter;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
  * for persisting in the database.
  */
 @Converter(autoApply = true)
+@Component
 public class PresenceConverter implements AttributeConverter<Presence, String> {
 
     @Override

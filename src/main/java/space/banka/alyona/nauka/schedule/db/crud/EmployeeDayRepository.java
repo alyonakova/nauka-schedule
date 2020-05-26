@@ -13,4 +13,5 @@ public interface EmployeeDayRepository extends CrudRepository<EmployeeDay, Emplo
     EmployeeDay findByEmployeeIdAndDayId(Integer employeeId, Day.Id dayId);
 
     List<EmployeeDay> findByEmployeeIdAndDayIdYearAndDayIdMonth(Integer employeeId, Integer yearId, Integer monthId);
+
 }

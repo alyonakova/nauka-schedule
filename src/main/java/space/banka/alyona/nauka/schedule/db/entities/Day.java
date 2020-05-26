@@ -1,8 +1,6 @@
 package space.banka.alyona.nauka.schedule.db.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +14,9 @@ public class Day {
 
     @Embeddable
     @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Id implements Serializable {
 
         @Column(name = "year")

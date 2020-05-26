@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Учет времени</title>
     <link rel="stylesheet" th:href="@{/master.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 <header>
@@ -58,7 +60,12 @@
                 <td th:text="${row.employee.getPosition().getName()}"></td>
                 <td th:text="${row.employee.getId()}"></td>
                 <td th:each="day: ${timesheet.days}">
-                    <span th:text="${row.findDay(day).presence.getLetterCode()}"></span>
+                    <span contenteditable="true" onfocusout="onCellUpdate(this);"
+                          th:data-employee-id="${row.employee.id}"
+                          th:data-year="${year}"
+                          th:data-month="${month}"
+                          th:data-day="${day.id.day}"
+                          th:text="${row.findDay(day).presence?.getLetterCode()}"></span>
                 </td>
                 <td th:text="${row.totalPresenceScore.toString()}"></td>
             </tr>
@@ -66,5 +73,6 @@
         </table>
     </section>
 </main>
+<script src="/timesheet.js"></script>
 </body>
 </html>

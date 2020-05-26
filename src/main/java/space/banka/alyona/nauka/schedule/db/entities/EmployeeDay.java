@@ -35,5 +35,6 @@ public class EmployeeDay {
     @ManyToOne
     Employee employee;
 
+    @Column(nullable = false)
     Presence presence;
 }
