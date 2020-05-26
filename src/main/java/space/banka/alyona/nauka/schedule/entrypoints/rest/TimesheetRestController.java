@@ -2,11 +2,11 @@ package space.banka.alyona.nauka.schedule.entrypoints.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import space.banka.alyona.nauka.schedule.entrypoints.webui.Timesheet;
-import space.banka.alyona.nauka.schedule.entrypoints.webui.TimesheetCreator;
+import space.banka.alyona.nauka.schedule.domain.Timesheet;
+import space.banka.alyona.nauka.schedule.domain.TimesheetCreator;
 
 @RestController
-public class TimesheetController {
+public class TimesheetRestController {
 
     @Autowired
     private TimesheetCreator timesheetCreator;
