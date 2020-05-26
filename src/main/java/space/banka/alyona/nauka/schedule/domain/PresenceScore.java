@@ -1,4 +1,4 @@
-package space.banka.alyona.nauka.schedule.entrypoints.webui;
+package space.banka.alyona.nauka.schedule.domain;
 
 import space.banka.alyona.nauka.schedule.db.entities.Presence;
 
