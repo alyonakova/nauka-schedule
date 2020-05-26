@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Date;
 
@@ -20,7 +22,7 @@ public class Employee {
 
     String name;
     String surname;
-    Date birthDate;
+    LocalDate birthDate;
 
     @ManyToOne
     Position position;
@@ -36,4 +38,8 @@ public class Employee {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     public Collection<EmployeeDay> employeeDays;
+
+    public long getAge() {
+        return ChronoUnit.YEARS.between(birthDate, LocalDate.now());
+    }
 }

@@ -36,9 +36,9 @@
                 <td th:text="${employee.getName()}"></td>
                 <td th:text="${employee.getSurname()}"></td>
                 <td th:text="${employee.getBirthDate()}"></td>
-                <td></td>
+                <td th:text="${employee.getAge()}"></td>
                 <td th:text="${employee.getPosition().getName()}"></td>
-                <td> <input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"> </td>
+                <td> <input type="checkbox" checked readonly disabled th:checked="${employee.isRemoteWork()}"> </td>
                 <td th:text="${employee.getAddress()}"></td>
             </tr>
             </tbody>
