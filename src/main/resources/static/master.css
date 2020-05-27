@@ -1,3 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    font-family: 'PT Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: #59b3de;
+    color: white;
+    padding-left: 6em;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 0;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+header a:hover {
+    color: #2360ce;
+}
+
+main {
+    margin: 2em 4em;
+}
+
+section {
+    overflow-x: auto;
+
+}
+
+table {
+    border: solid 1px #8e8e8e;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: solid 1px #8e8e8e;
+    padding: 0.2em 0.4em;
+}
+
+.add-department {
+    margin-bottom: 5px;
+    padding: .5em .3em;
+}
+
+.delete-department {
+    background: linear-gradient(to top, #ff6c6c, #ffe6e6);
+    border-color: #ffb3b3 #fd1b1b #e30000 #fcaaaa;
+}
+
+.delete-department:hover {
+    background: linear-gradient(to top, #ff0000, #ff8585);
+    color: white;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    background: linear-gradient(to top, #aecefd, #eaf6fc);
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border: 1px solid;
+    padding: .3em .1em;
+}
+
+button:hover {
+    background: linear-gradient(to top, #2a6fd4, #6b9cff);
+    color: white;
+}
+
+thead {
+    background: linear-gradient(to top, #f3f8ff, #e1e7ff);
+}
+
 .change-successful {
     animation-name: tada, green-blink;
     animation-duration: 1s;
@@ -56,4 +136,34 @@
     100% {
         transform: scale3d(1, 1, 1);
     }
+}
+
+.months-list {
+    list-style: none;
+    padding: 0;
+}
+
+.months-list .active {
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.timesheet-cell-day.business {
+    /* No styling */
+}
+
+.timesheet-cell-day {
+    cursor: text;
+}
+
+.timesheet-cell-day.weekend {
+    background-color: hsl(180, 100%, 85%);
+}
+
+.timesheet-cell-day.pre_holiday {
+    background-color: hsl(45, 100%, 85%);
+}
+
+.timesheet-cell-day.holiday {
+    background-color: hsl(0, 100%, 85%);
 }

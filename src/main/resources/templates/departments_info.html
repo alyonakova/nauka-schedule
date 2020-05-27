@@ -14,7 +14,7 @@
 </header>
 <main>
     <section>
-        <button>Добавить</button>
+        <button class="add-department">Добавить департамент</button>
     </section>
     <section>
         <table>
@@ -32,7 +32,8 @@
                     <span contenteditable="true" th:text="${department.name}"
                           th:data-dep-id="${department.id}" onfocusout="onDepartmentUpdate(this);"></span>
                 </td>
-                <td><button onclick="onDepartmentDelete(this)" th:data-department-id="${department.id}">Удалить</button></td>
+                <td><button onclick="onDepartmentDelete(this)"
+                            th:data-department-id="${department.id}" class="delete-department">Удалить</button></td>
             </tr>
             </tbody>
         </table>

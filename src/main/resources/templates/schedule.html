@@ -21,7 +21,7 @@
     </p>
     <section>
         <h1>Департаменты</h1>
-        <ul>
+        <ul class="departments-list">
             <li th:each="department : ${departments}">
                 <a href="#"
                    th:href="@{|/departments/${department.id}/timesheet?year=${year}&month=${month}|}"
@@ -37,10 +37,12 @@
         </ul>
     </section>
     <section>
-        <ul style="list-style: none;">
-            <li style="display: inline-block;" th:each="month: ${months}">
-                <a th:href="@{|?year=${year}&month=${month.value}|}"
-                   th:text="${month.name}">январь</a>
+        <ul class="months-list">
+            <li style="display: inline-block;" th:each="m: ${months}">
+                <span class="active" th:if="${month} == ${m.value}" th:text="${m.name}"></span>
+                <a th:href="@{|?year=${year}&month=${m.value}|}"
+                   th:if="${month} != ${m.value}"
+                   th:text="${m.name}">январь</a>
             </li>
         </ul>
     </section>
@@ -60,13 +62,15 @@
                 <td th:text="|${row.employee.getName()} ${row.employee.getSurname()}|"></td>
                 <td th:text="${row.employee.getPosition().getName()}"></td>
                 <td th:text="${row.employee.getId()}"></td>
-                <td th:each="day: ${timesheet.days}">
+                <td th:each="day: ${timesheet.days}"
+                    class="timesheet-cell-day"
+                    th:classappend="${day.type.name().toLowerCase()}">
                     <span contenteditable="true" onfocusout="onCellUpdate(this);"
                           th:data-employee-id="${row.employee.id}"
                           th:data-year="${year}"
                           th:data-month="${month}"
                           th:data-day="${day.id.day}"
-                          th:text="${row.findDay(day).presence?.getLetterCode()}"></span>
+                          th:text="${row.findDay(day).presence?.getLetterCode()}">Я</span>
                 </td>
                 <td th:text="${row.totalPresenceScore.toString()}"></td>
             </tr>
