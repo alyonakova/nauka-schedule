@@ -15,7 +15,6 @@
 <main>
     <section>
         <button>Добавить</button>
-        <button>Удалить</button>
     </section>
     <section>
         <table>
@@ -23,20 +22,23 @@
             <tr>
                 <td>ID</td>
                 <td>Название департамента</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="department : ${departments}">
+            <tr th:each="department : ${departments}" th:data-department-id="${department.id}">
                 <td th:text="${department.id}"></td>
                 <td>
                     <span contenteditable="true" th:text="${department.name}"
                           th:data-dep-id="${department.id}" onfocusout="onDepartmentUpdate(this);"></span>
                 </td>
+                <td><button onclick="onDepartmentDelete(this)" th:data-department-id="${department.id}">Удалить</button></td>
             </tr>
             </tbody>
         </table>
     </section>
 </main>
-<script src="/timesheet.js"></script>
+<script src="/departments.js"></script>
+<script src="/animation.js"></script>
 </body>
 </html>
