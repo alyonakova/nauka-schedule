@@ -25,16 +25,6 @@ public class TimesheetRestController {
     @Autowired
     private PresenceConverter presenceConverter;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private PositionRepository positionRepository;
-
-    @Autowired
-    private DepartmentRepository departmentRepository;
-
-
     @GetMapping("/api/departments/{departmentId}/timesheet")
     Timesheet generateTimesheet(@PathVariable Integer departmentId,
                                 @RequestParam Integer year,
@@ -58,33 +48,5 @@ public class TimesheetRestController {
         final Presence presence = presenceConverter.convertToEntityAttribute(request.presence);
         employeeDay.setPresence(presence);
         employeeDayRepository.save(employeeDay);
-    }
-
-    @PostMapping("/api/employees")
-    void updateEmployeesList(@RequestBody EmployeeUpdateRequest request) {
-
-        final Employee employee = employeeRepository.findById(request.id).orElseThrow();
-        employee.setName(request.name);
-        employee.setSurname(request.surname);
-        employee.setBirthDate(request.birthDate);
-
-        Position oldPosition = employee.getPosition();
-        oldPosition.getEmployee().remove(employee);
-
-        Position newPosition = positionRepository.findByName(request.positionName);
-        employee.setPosition(newPosition);
-        newPosition.getEmployee().add(employee);
-
-        employee.setRemoteWork(request.remoteWork);
-        employee.setAddress(request.address);
-        employeeRepository.save(employee);
-
-    }
-
-    @PostMapping("/api/departments")
-    void updateDepartmentsList(@RequestBody DepartmentUpdateRequest request) {
-        final Department department = departmentRepository.findById(request.id).orElseThrow();
-        department.setName(request.name);
-        departmentRepository.save(department);
     }
 }

@@ -30,35 +30,3 @@ function onCellUpdate(cell) {
         }
     });
 }
-
-function animateElement(animatedElement, className) {
-    animatedElement.classList.add(className);
-    animatedElement.addEventListener("animationend", event => {
-        event.target.classList.remove(className);
-    });
-}
-
-function onEmployeeUpdate() {
-
-}
-
-function onDepartmentUpdate(cell) {
-    let newName = cell.textContent;
-    let departmentId = cell.getAttribute("data-dep-id");
-    let csrfToken = document.querySelector("meta[name='_csrf']").getAttribute('content');
-    let csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute('content');
-
-    fetch(new Request('api/departments'), {
-        method: 'POST',
-        body: JSON.stringify({
-            id: departmentId, name: newName,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            [csrfHeader]: csrfToken,
-        },
-    }).then(response => {
-        let animatedElement = cell.parentElement;
-        animateElement(animatedElement, "change-successful");
-    });
-}
