@@ -13,6 +13,12 @@
     <a href="/logout">Выйти</a>
 </header>
 <main>
+    <p>
+        Год: <span th:text="${year}">1970</span>,
+        месяц: <span th:text="${month}">январь</span>.
+        <br>
+        ИД департамента: <span th:text="${departmentId} ?: 'выбраны все департаменты'"></span>.
+    </p>
     <section>
         <h1>Департаменты</h1>
         <ul>
