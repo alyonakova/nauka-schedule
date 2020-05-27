@@ -10,6 +10,9 @@ import java.util.HashSet;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Day {
 
     @Embeddable
@@ -47,6 +50,6 @@ public class Day {
     Collection<EmployeeDay> employeeDays = new HashSet<>();
 
     public LocalDate toLocalDate() {
-        return LocalDate.of(year.year, id.month, id.day);
+        return LocalDate.of(id.year, id.month, id.day);
     }
 }

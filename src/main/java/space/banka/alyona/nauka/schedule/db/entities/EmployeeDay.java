@@ -1,16 +1,25 @@
 package space.banka.alyona.nauka.schedule.db.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeDay {
 
     @Embeddable
     @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Id implements Serializable {
 
         public Day.Id dayId;
