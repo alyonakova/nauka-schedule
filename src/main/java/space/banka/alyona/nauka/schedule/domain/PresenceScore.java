@@ -18,6 +18,9 @@ public class PresenceScore {
         for (Map.Entry<Presence, Integer> entry : scores.entrySet()) {
             result.append(entry.getKey().getLetterCode() + "(" + entry.getValue() + ");");
         }
+        if (result.length() > 0 && result.charAt(result.length() - 1) == ';') {
+            result.deleteCharAt(result.length() - 1);
+        }
         return result.toString();
     }
 }
