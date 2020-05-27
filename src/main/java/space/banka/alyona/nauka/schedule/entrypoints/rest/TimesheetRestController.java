@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import space.banka.alyona.nauka.schedule.db.converters.PresenceConverter;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeDayRepository;
-import space.banka.alyona.nauka.schedule.db.entities.Day;
-import space.banka.alyona.nauka.schedule.db.entities.EmployeeDay;
-import space.banka.alyona.nauka.schedule.db.entities.Presence;
+import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
+import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
+import space.banka.alyona.nauka.schedule.db.entities.*;
 import space.banka.alyona.nauka.schedule.domain.Timesheet;
 import space.banka.alyona.nauka.schedule.domain.TimesheetCreator;
+
+import java.util.Optional;
 
 @RestController
 public class TimesheetRestController {
@@ -21,6 +23,12 @@ public class TimesheetRestController {
 
     @Autowired
     private PresenceConverter presenceConverter;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private PositionRepository positionRepository;
 
 
     @GetMapping("/api/departments/{departmentId}/timesheet")
@@ -46,5 +54,26 @@ public class TimesheetRestController {
         final Presence presence = presenceConverter.convertToEntityAttribute(request.presence);
         employeeDay.setPresence(presence);
         employeeDayRepository.save(employeeDay);
+    }
+
+    @PostMapping("/api/employees")
+    void updateEmployeesList(@RequestBody EmployeeUpdateRequest request) {
+
+        final Employee employee = employeeRepository.findById(request.id).orElseThrow();
+        employee.setName(request.name);
+        employee.setSurname(request.surname);
+        employee.setBirthDate(request.birthDate);
+
+        Position oldPosition = employee.getPosition();
+        oldPosition.getEmployee().remove(employee);
+
+        Position newPosition = positionRepository.findByName(request.positionName);
+        employee.setPosition(newPosition);
+        newPosition.getEmployee().add(employee);
+
+        employee.setRemoteWork(request.remoteWork);
+        employee.setAddress(request.address);
+        employeeRepository.save(employee);
+
     }
 }

@@ -20,7 +20,7 @@
         <table>
             <thead>
             <tr>
-                <td>Превью</td>
+                <td>ID</td>
                 <td>Имя</td>
                 <td>Фамилия</td>
                 <td>Дата рождения</td>
@@ -32,15 +32,14 @@
             </thead>
             <tbody>
             <tr th:each="employee : ${employees}">
-                <!-- фото сотрудника -->
-                <td></td>
-                <td th:text="${employee.getName()}"></td>
-                <td th:text="${employee.getSurname()}"></td>
-                <td th:text="${employee.getBirthDate()}"></td>
+                <td th:text="${employee.getId()}"></td>
+                <td contenteditable="true" th:text="${employee.getName()}"></td>
+                <td contenteditable="true" th:text="${employee.getSurname()}"></td>
+                <td contenteditable="true" th:text="${employee.getBirthDate()}"></td>
                 <td th:text="${employee.getAge()}"></td>
-                <td th:text="${employee.getPosition().getName()}"></td>
-                <td> <input type="checkbox" checked readonly disabled th:checked="${employee.isRemoteWork()}"> </td>
-                <td th:text="${employee.getAddress()}"></td>
+                <td contenteditable="true" th:text="${employee.getPosition().getName()}"></td>
+                <td> <input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"></td>
+                <td contenteditable="true" th:text="${employee.getAddress()}"></td>
             </tr>
             </tbody>
         </table>
