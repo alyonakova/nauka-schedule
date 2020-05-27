@@ -3,6 +3,7 @@ package space.banka.alyona.nauka.schedule.entrypoints.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import space.banka.alyona.nauka.schedule.db.converters.PresenceConverter;
+import space.banka.alyona.nauka.schedule.db.crud.DepartmentRepository;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeDayRepository;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
 import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
@@ -29,6 +30,9 @@ public class TimesheetRestController {
 
     @Autowired
     private PositionRepository positionRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
 
     @GetMapping("/api/departments/{departmentId}/timesheet")
@@ -75,5 +79,12 @@ public class TimesheetRestController {
         employee.setAddress(request.address);
         employeeRepository.save(employee);
 
+    }
+
+    @PostMapping("/api/departments")
+    void updateDepartmentsList(@RequestBody DepartmentUpdateRequest request) {
+        final Department department = departmentRepository.findById(request.id).orElseThrow();
+        department.setName(request.name);
+        departmentRepository.save(department);
     }
 }

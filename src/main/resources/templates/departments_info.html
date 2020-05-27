@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Департаменты</title>
     <link rel="stylesheet" th:href="@{/master.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 <header>
@@ -20,16 +22,22 @@
         <table>
             <thead>
             <tr>
+                <td>ID</td>
                 <td>Название департамента</td>
             </tr>
             </thead>
             <tbody>
             <tr th:each="department : ${departments}">
-                <td th:text="${department.name}"></td>
+                <td th:text="${department.id}"></td>
+                <td>
+                    <span contenteditable="true" th:text="${department.name}"
+                          th:data-dep-id="${department.id}" onfocusout="onDepartmentUpdate(this);"></span>
+                </td>
             </tr>
             </tbody>
         </table>
     </section>
 </main>
+<script src="/timesheet.js"></script>
 </body>
 </html>
