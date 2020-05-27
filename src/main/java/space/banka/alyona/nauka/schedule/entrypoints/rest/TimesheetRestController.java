@@ -3,15 +3,10 @@ package space.banka.alyona.nauka.schedule.entrypoints.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import space.banka.alyona.nauka.schedule.db.converters.PresenceConverter;
-import space.banka.alyona.nauka.schedule.db.crud.DepartmentRepository;
-import space.banka.alyona.nauka.schedule.db.crud.EmployeeDayRepository;
-import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
-import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
+import space.banka.alyona.nauka.schedule.db.crud.*;
 import space.banka.alyona.nauka.schedule.db.entities.*;
 import space.banka.alyona.nauka.schedule.domain.Timesheet;
 import space.banka.alyona.nauka.schedule.domain.TimesheetCreator;
-
-import java.util.Optional;
 
 @RestController
 public class TimesheetRestController {
@@ -23,7 +18,13 @@ public class TimesheetRestController {
     private EmployeeDayRepository employeeDayRepository;
 
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
     private PresenceConverter presenceConverter;
+
+    @Autowired
+    private DayService dayService;
 
     @GetMapping("/api/departments/{departmentId}/timesheet")
     Timesheet generateTimesheet(@PathVariable Integer departmentId,
@@ -40,13 +41,27 @@ public class TimesheetRestController {
 
     @PostMapping("/api/timesheet")
     void updateTimesheetCell(@RequestBody TimesheetCellUpdateRequest request) {
-        final EmployeeDay employeeDay = employeeDayRepository.findByEmployeeIdAndDayId(request.employeeId, Day.Id.builder()
+        final Day.Id dayId = Day.Id.builder()
                 .year(request.year)
                 .month(request.month)
                 .day(request.day)
-                .build());
+                .build();
+        final EmployeeDay employeeDay = employeeDayRepository
+                .findByEmployeeIdAndDayId(request.employeeId, dayId)
+                .orElseGet(() -> makeDefaultEmployeeDay(dayId, request.employeeId));
         final Presence presence = presenceConverter.convertToEntityAttribute(request.presence);
         employeeDay.setPresence(presence);
         employeeDayRepository.save(employeeDay);
+    }
+
+    private EmployeeDay makeDefaultEmployeeDay(Day.Id dayId, Integer employeeId) {
+        return EmployeeDay.builder()
+                .id(EmployeeDay.Id.builder()
+                        .dayId(dayId)
+                        .employeeId(employeeId)
+                        .build())
+                .day(dayService.findOrCreate(dayId.year, dayId.month, dayId.day))
+                .employee(employeeRepository.findById(employeeId).orElseThrow())
+                .build();
     }
 }

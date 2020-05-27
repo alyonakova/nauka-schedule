@@ -2,13 +2,14 @@ package space.banka.alyona.nauka.schedule.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import space.banka.alyona.nauka.schedule.db.crud.DayRepository;
+import space.banka.alyona.nauka.schedule.db.crud.DayService;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeDayRepository;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
 import space.banka.alyona.nauka.schedule.db.entities.Day;
 import space.banka.alyona.nauka.schedule.db.entities.Employee;
 import space.banka.alyona.nauka.schedule.db.entities.EmployeeDay;
 
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class TimesheetCreator {
 
     @Autowired
-    private DayRepository dayRepository;
+    private DayService dayService;
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -27,7 +28,8 @@ public class TimesheetCreator {
     private EmployeeDayRepository employeeDayRepository;
 
     public Timesheet createTimesheet(List<Employee> employees, Integer year, Integer month) {
-        List<Day> days = dayRepository.findByYearYearAndIdMonth(year, month);
+        List<Day> days = dayService.findByYearAndMonth(year, month);
+        YearMonth.of(year, month).lengthOfMonth();
         List<TimesheetRow> rows = new ArrayList<>();
         for (Employee employee : employees) {
             rows.add(createRow(employee, days, year, month));
