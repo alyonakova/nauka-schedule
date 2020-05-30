@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый департамент</title>
+    <link rel="stylesheet" th:href="@{/master.css}">
+</head>
+<body>
+<header>
+    <h1>NAUKA: добавить департамент</h1>
+    <a href="/logout">Выйти</a>
+</header>
+<main>
+    <p>Новый департамент:</p>
+    <form action="POST">
+        <input type="text" placeholder="Введите название департамента">
+        <button>Добавить</button>
+    </form>
+</main>
+</body>
+</html>

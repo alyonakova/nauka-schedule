@@ -17,4 +17,9 @@ public class DepartmentsInfoController {
         model.addAttribute("departments", departmentRepository.findAll());
         return "departments_info";
     }
+
+    @RequestMapping("/departments/add")
+    String addDepartment(Model model) {
+        return "add_department";
+    }
 }
