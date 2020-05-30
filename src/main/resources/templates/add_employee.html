@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить нового сотрудника</title>
+    <link rel="stylesheet" th:href="@{/master.css}">
+</head>
+<body>
+<header>
+    <h1>NAUKA: добавить сотрудника</h1>
+    <a href="/logout">Выйти</a>
+</header>
+<main>
+    <form action="POST">
+        <input type="text" placeholder="Введите имя"><br>
+        <input type="text" placeholder="Введите фамилию"><br>
+        <input type="date" placeholder="Введите дату рождения"><br>
+        <input type="text" placeholder="Введите должность"><br>
+        <label> Удаленная работа:
+            <input type="checkbox">
+        </label><br>
+        <input type="text" placeholder="Введите адрес"><br>
+        <input type="text" placeholder="Введите департамент"><br>
+        <button type="submit">Добавить</button>
+    </form>
+</main>
+</body>
+</html>
