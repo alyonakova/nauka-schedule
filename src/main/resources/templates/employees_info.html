@@ -28,6 +28,7 @@
                 <td>Должность</td>
                 <td>Удаленная работа</td>
                 <td>Адрес проживания</td>
+                <td>Департамент</td>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@
                 <td contenteditable="true" th:text="${employee.getPosition().getName()}"></td>
                 <td><input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"></td>
                 <td contenteditable="true" th:text="${employee.getAddress()}"></td>
+                <td contenteditable="true" th:text="${employee.getDepartment().name}"></td>
             </tr>
             </tbody>
         </table>
