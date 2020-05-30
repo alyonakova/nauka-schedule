@@ -11,10 +11,12 @@ body {
 header {
     background-color: #59b3de;
     color: white;
-    padding-left: 6em;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 1em 4em;
     margin: 0;
+}
+
+header h1 {
+    margin: 0 0 .25em;
 }
 
 header a {
@@ -30,9 +32,8 @@ main {
     margin: 2em 4em;
 }
 
-section {
+.horizontally-scrollable {
     overflow-x: auto;
-
 }
 
 table {
