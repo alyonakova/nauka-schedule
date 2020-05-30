@@ -11,10 +11,12 @@
     <a href="/logout">Выйти</a>
 </header>
 <main>
-    <p>Новый департамент:</p>
-    <form action="POST">
-        <input type="text" placeholder="Введите название департамента">
-        <button>Добавить</button>
+    <form method="POST" th:action="@{/departments/add}" th:object="${department}">
+        <label>
+            Новый департамент: <br>
+            <input type="text" placeholder="Введите название департамента" th:field="*{name}">
+        </label>
+        <button type="submit">Добавить</button>
     </form>
 </main>
 </body>
