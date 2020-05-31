@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.convert.JodaTimeConverters;
+
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -12,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class EmployeeForm {
     String name;
     String surname;
-    String birthDate;
+    LocalDate birthDate;
     String position;
     boolean remoteWork;
     String address;
