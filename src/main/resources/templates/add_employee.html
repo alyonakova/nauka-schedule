@@ -11,16 +11,16 @@
     <a href="/logout">Выйти</a>
 </header>
 <main>
-    <form action="POST">
-        <input type="text" placeholder="Введите имя"><br>
-        <input type="text" placeholder="Введите фамилию"><br>
-        <input type="date" placeholder="Введите дату рождения"><br>
-        <input type="text" placeholder="Введите должность"><br>
+    <form action="POST" th:action="@{/employees/add}" th:object="${employee}">
+        <input type="text" placeholder="Введите имя" th:field="*{name}"><br>
+        <input type="text" placeholder="Введите фамилию" th:field="*{surname}"><br>
+        <input type="date" placeholder="Введите дату рождения" th:field="*{birthDate}"><br>
+        <input type="text" placeholder="Введите должность" th:field="*{position}"><br>
         <label> Удаленная работа:
-            <input type="checkbox">
+            <input type="checkbox" th:field="*{remoteWork}">
         </label><br>
-        <input type="text" placeholder="Введите адрес"><br>
-        <input type="text" placeholder="Введите департамент"><br>
+        <input type="text" placeholder="Введите адрес" th:field="*{address}"><br>
+        <input type="text" placeholder="Введите департамент" th:field="*{department}"><br>
         <button type="submit">Добавить</button>
     </form>
 </main>
