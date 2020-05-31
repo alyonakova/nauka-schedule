@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.convert.JodaTimeConverters;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 public class EmployeeForm {
     String name;
     String surname;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate birthDate;
     String position;
     boolean remoteWork;
