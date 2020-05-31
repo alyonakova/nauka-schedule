@@ -11,7 +11,7 @@
     <a href="/logout">Выйти</a>
 </header>
 <main>
-    <form action="POST" th:action="@{/employees/add}" th:object="${employee}">
+    <form method="POST" th:action="@{/employees/add}" th:object="${employee}">
         <input type="text" placeholder="Введите имя" th:field="*{name}"><br>
         <input type="text" placeholder="Введите фамилию" th:field="*{surname}"><br>
         <input type="date" placeholder="Введите дату рождения" th:field="*{birthDate}"><br>
