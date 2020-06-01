@@ -1,9 +1,7 @@
 package space.banka.alyona.nauka.schedule.entrypoints.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
 import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
 import space.banka.alyona.nauka.schedule.db.entities.Employee;
@@ -37,5 +35,10 @@ public class EmployeesRestController {
         employee.setAddress(request.address);
         employeeRepository.save(employee);
 
+    }
+
+    @DeleteMapping("/api/employees/{id}")
+    void deleteEmployee(@PathVariable("id") Integer id) {
+        employeeRepository.deleteById(id);
     }
 }

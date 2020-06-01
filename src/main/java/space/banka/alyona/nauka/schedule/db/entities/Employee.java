@@ -31,7 +31,7 @@ public class Employee {
     @ManyToOne
     Department department;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.REMOVE})
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     public Collection<EmployeeDay> employeeDays;

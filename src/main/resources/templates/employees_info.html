@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Сотрудники</title>
     <link rel="stylesheet" th:href="@{/master.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 <header>
@@ -32,7 +34,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="employee : ${employees}">
+            <tr th:each="employee : ${employees}" th:data-employee-id="${employee.id}">
                 <td th:text="${employee.getId()}"></td>
                 <td contenteditable="true" th:text="${employee.getName()}"></td>
                 <td contenteditable="true" th:text="${employee.getSurname()}"></td>
@@ -42,7 +44,8 @@
                 <td><input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"></td>
                 <td contenteditable="true" th:text="${employee.getAddress()}"></td>
                 <td contenteditable="true" th:text="${employee.getDepartment().name}"></td>
-                <td><button class="delete-button">Удалить</button></td>
+                <td><button class="delete-button" onclick="onEmployeeDelete(this)"
+                            th:data-employee-id="${employee.id}">Удалить</button></td>
             </tr>
             </tbody>
         </table>
