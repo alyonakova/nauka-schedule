@@ -14,7 +14,6 @@
     <section>
         <a href="/employees/add">Добавить сотрудника</a>
         <button>Редактировать</button>
-        <button>Удалить</button>
     </section>
     <section>
         <table>
@@ -29,6 +28,7 @@
                 <td>Удаленная работа</td>
                 <td>Адрес проживания</td>
                 <td>Департамент</td>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +42,7 @@
                 <td><input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"></td>
                 <td contenteditable="true" th:text="${employee.getAddress()}"></td>
                 <td contenteditable="true" th:text="${employee.getDepartment().name}"></td>
+                <td><button class="delete-button">Удалить</button></td>
             </tr>
             </tbody>
         </table>

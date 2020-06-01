@@ -51,12 +51,12 @@ td, th {
     padding: .5em .3em;
 }
 
-.delete-department {
+.delete-button {
     background: linear-gradient(to top, #ff6c6c, #ffe6e6);
     border-color: #ffb3b3 #fd1b1b #e30000 #fcaaaa;
 }
 
-.delete-department:hover {
+.delete-button:hover {
     background: linear-gradient(to top, #ff0000, #ff8585);
     color: white;
 }
