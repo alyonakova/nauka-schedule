@@ -11,7 +11,7 @@ import space.banka.alyona.nauka.schedule.db.crud.DepartmentRepository;
 import space.banka.alyona.nauka.schedule.db.crud.EmployeeRepository;
 import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
 import space.banka.alyona.nauka.schedule.db.entities.Employee;
-import space.banka.alyona.nauka.schedule.entrypoints.webui.formobjects.EmployeeForm;
+import space.banka.alyona.nauka.schedule.entrypoints.webui.formobjects.EmployeeAddForm;
 
 @Controller
 public class EmployeesInfoController {
@@ -33,21 +33,21 @@ public class EmployeesInfoController {
 
     @GetMapping("/employees/add")
     String addEmployee(Model model) {
-        model.addAttribute("employee", new EmployeeForm());
+        model.addAttribute("employee", new EmployeeAddForm());
         return "add_employee";
     }
 
     @PostMapping("/employees/add")
-    String addEmployee(@ModelAttribute EmployeeForm employeeForm) {
+    String addEmployee(@ModelAttribute EmployeeAddForm employeeCreateForm) {
         final Employee employee = new Employee();
-        employee.setName(employeeForm.getName());
-        employee.setSurname(employeeForm.getSurname());
-        employee.setBirthDate(employeeForm.getBirthDate());
-        employee.setRemoteWork(employeeForm.isRemoteWork());
-        employee.setAddress(employeeForm.getAddress());
+        employee.setName(employeeCreateForm.getName());
+        employee.setSurname(employeeCreateForm.getSurname());
+        employee.setBirthDate(employeeCreateForm.getBirthDate());
+        employee.setRemoteWork(employeeCreateForm.isRemoteWork());
+        employee.setAddress(employeeCreateForm.getAddress());
 
-        String positionName = employeeForm.getPosition();
-        String departmentName = employeeForm.getDepartment();
+        String positionName = employeeCreateForm.getPosition();
+        String departmentName = employeeCreateForm.getDepartment();
 
         employee.setPosition(positionRepository.findByName(positionName));
         employee.setDepartment(departmentRepository.findByName(departmentName));

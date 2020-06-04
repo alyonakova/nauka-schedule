@@ -7,6 +7,8 @@ import space.banka.alyona.nauka.schedule.db.crud.PositionRepository;
 import space.banka.alyona.nauka.schedule.db.entities.Employee;
 import space.banka.alyona.nauka.schedule.db.entities.Position;
 
+import java.util.Objects;
+
 @RestController
 public class EmployeesRestController {
 
@@ -16,25 +18,23 @@ public class EmployeesRestController {
     @Autowired
     private PositionRepository positionRepository;
 
-    @PostMapping("/api/employees")
-    void updateEmployeesList(@RequestBody EmployeeUpdateRequest request) {
-
-        final Employee employee = employeeRepository.findById(request.id).orElseThrow();
-        employee.setName(request.name);
-        employee.setSurname(request.surname);
-        employee.setBirthDate(request.birthDate);
-
-        Position oldPosition = employee.getPosition();
-        oldPosition.getEmployee().remove(employee);
-
-        Position newPosition = positionRepository.findByName(request.positionName);
-        employee.setPosition(newPosition);
-        newPosition.getEmployee().add(employee);
-
-        employee.setRemoteWork(request.remoteWork);
-        employee.setAddress(request.address);
+    @PatchMapping("/api/employees/{id}")
+    void updateEmployee(@PathVariable("id") Integer id,
+                        @RequestBody EmployeeUpdateRequest request) {
+        final Employee employee = employeeRepository.findById(id).orElseThrow();
+        if (request.name != null)
+            employee.setName(request.name);
+        if (request.surname != null)
+            employee.setSurname(request.surname);
+        if (request.birthDate != null)
+            employee.setBirthDate(request.birthDate);
+        if (request.positionName != null)
+            employee.setPosition(Objects.requireNonNull(positionRepository.findByName(request.positionName)));
+        if (request.remoteWork != null)
+            employee.setRemoteWork(request.remoteWork);
+        if (request.address != null)
+            employee.setAddress(request.address);
         employeeRepository.save(employee);
-
     }
 
     @DeleteMapping("/api/employees/{id}")

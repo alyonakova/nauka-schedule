@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeForm {
+public class EmployeeAddForm {
     String name;
     String surname;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

@@ -17,7 +17,7 @@
         <a href="/employees/add">Добавить сотрудника</a>
         <button>Редактировать</button>
     </section>
-    <section>
+    <section class="horizontally-scrollable">
         <table>
             <thead>
             <tr>
@@ -35,15 +35,23 @@
             </thead>
             <tbody>
             <tr th:each="employee : ${employees}" th:data-employee-id="${employee.id}">
-                <td th:text="${employee.getId()}"></td>
-                <td contenteditable="true" th:text="${employee.getName()}"></td>
-                <td contenteditable="true" th:text="${employee.getSurname()}"></td>
-                <td contenteditable="true" th:text="${employee.getBirthDate()}"></td>
-                <td th:text="${employee.getAge()}"></td>
-                <td contenteditable="true" th:text="${employee.getPosition().getName()}"></td>
-                <td><input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"></td>
-                <td contenteditable="true" th:text="${employee.getAddress()}"></td>
-                <td contenteditable="true" th:text="${employee.getDepartment().name}"></td>
+                <td data-field="" th:text="${employee.getId()}"></td>
+                <td contenteditable="true" th:text="${employee.getName()}"
+                    data-field="name" onfocusout="onEmployeeUpdate(this);">Иван</td>
+                <td contenteditable="true" th:text="${employee.getSurname()}"
+                    data-field="surname" onfocusout="onEmployeeUpdate(this);">Петров</td>
+                <td contenteditable="true" th:text="${employee.getBirthDate()}"
+                    style="white-space: nowrap;"
+                    data-field="birthDate" onfocusout="onEmployeeUpdate(this);">2020-05-30</td>
+                <td th:text="${employee.getAge()}">0</td>
+                <td contenteditable="true" th:text="${employee.getPosition()?.getName()}"
+                    data-field="position" onfocusout="onEmployeeUpdate(this);">Программист-математик</td>
+                <td><input type="checkbox" checked readonly th:checked="${employee.isRemoteWork()}"
+                           data-field="remoteWork" onchange="onEmployeeUpdate(this.parentElement);"></td>
+                <td contenteditable="true" th:text="${employee.getAddress()}"
+                    data-field="address" onfocusout="onEmployeeUpdate(this);">ул. Пушкина, д. Кукушкина</td>
+                <td contenteditable="true" th:text="${employee.getDepartment()?.name}"
+                    data-field="department" onfocusout="onEmployeeUpdate(this);">Отдел тайн</td>
                 <td><button class="delete-button" onclick="onEmployeeDelete(this)"
                             th:data-employee-id="${employee.id}">Удалить</button></td>
             </tr>
